@@ -1,11 +1,12 @@
 const Todo = require('../models/Todo')
+const moment = require('moment')
 
 module.exports = {
     getTodos: async (req,res)=>{
         try{
             const todoItems = await Todo.find()
             const itemsLeft = await Todo.countDocuments({completed: false})
-            res.render('todos.ejs', {todos: todoItems, left: itemsLeft})
+            res.render('todos.ejs', {todos: todoItems, left: itemsLeft, moment})
         }catch(err){
             console.log(err)
         }
